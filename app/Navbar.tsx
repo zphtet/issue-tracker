@@ -5,18 +5,22 @@ import { usePathname } from "next/navigation";
 import { AiFillBug } from "react-icons/ai";
 const Navbar = () => {
   const pathname = usePathname();
-  console.log(pathname);
   const dashboardActive = pathname === "/";
   const issuesActive = pathname === "/issues";
   return (
-    <Box className="space-x-5 flex p-5 items-center border-b">
-      <AiFillBug className="text-3xl" />
-      <Link className={`nav-link ${dashboardActive && "active"}`} href={"/"}>
-        Dashboard
-      </Link>
-      <Link className={`nav-link ${issuesActive && "active"}`} href={"/issues"}>
-        Issues
-      </Link>
+    <Box className=" border-b">
+      <Box className="w-[min(100%,1280px)] space-x-5 flex p-5 items-center mx-auto ">
+        <AiFillBug className="text-3xl" />
+        <Link className={`nav-link ${dashboardActive && "active"}`} href={"/"}>
+          Dashboard
+        </Link>
+        <Link
+          className={`nav-link ${issuesActive && "active"}`}
+          href={"/issues"}
+        >
+          Issues
+        </Link>
+      </Box>
     </Box>
   );
 };
