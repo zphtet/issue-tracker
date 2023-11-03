@@ -39,3 +39,5 @@ export default async function IssuePage() {
     </div>
   );
 }
+
+export const revalidate = 0;
