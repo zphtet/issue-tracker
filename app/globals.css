@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  button {
+    @apply cursor-pointer;
+  }
+}
+
 @layer components {
   .nav-link {
     @apply text-xl  text-black;

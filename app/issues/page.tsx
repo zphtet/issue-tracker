@@ -1,7 +1,7 @@
 import { Table } from "@radix-ui/themes";
-import CreateButton from "./CreateButton";
-import TableCell from "./TableCell";
-import StatusCompoment from "./Status";
+import CreateButton from "./compoments/CreateButton";
+import TableCell from "./compoments/TableCell";
+import StatusCompoment from "./compoments/Status";
 import prisma from "@/prisma";
 import { Issue } from "@prisma/client";
 export default async function IssuePage() {
