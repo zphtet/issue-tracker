@@ -6,7 +6,7 @@ import prisma from "@/prisma";
 import { Issue } from "@prisma/client";
 export default async function IssuePage() {
   const data = (await prisma.issue.findMany({})) as Issue[];
-  // console.log(data);
+
   return (
     <div>
       <p>Issue Page</p>

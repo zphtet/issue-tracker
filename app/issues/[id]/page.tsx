@@ -6,15 +6,21 @@ import EditButton from "../compoments/EditButton";
 import DeleteButton from "../compoments/DeleteButton";
 import SelectComponent from "../compoments/Select";
 import Markdown from "react-markdown";
-
+import authOption from "@/utils/authOptions";
+import { getServerSession } from "next-auth";
 type DetailProps = {
   params: { id: string };
 };
 
 const DetailPage = async ({ params }: DetailProps) => {
+  const session = await getServerSession(authOption);
+
   const data = await prisma.issue.findUnique({
     where: { id: params.id },
   });
+
+  const users = await prisma.user.findMany({});
+
   if (!data) notFound();
   const { title, status, createdAt, description, id } = data;
   return (
@@ -29,11 +35,13 @@ const DetailPage = async ({ params }: DetailProps) => {
           <Markdown>{description}</Markdown>
         </div>
       </div>
-      <div className="basis-[200px]  flex flex-col gap-1">
-        <SelectComponent />
-        <EditButton id={id} />
-        <DeleteButton id={id} />
-      </div>
+      {session?.user && (
+        <div className="basis-[200px]  flex flex-col gap-1">
+          <SelectComponent users={users} />
+          <EditButton id={id} />
+          <DeleteButton id={id} />
+        </div>
+      )}
     </div>
   );
 };

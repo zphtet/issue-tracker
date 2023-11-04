@@ -5,5 +5,5 @@ export default withAuth(function middleware(request: Request) {
 });
 
 export const config = {
-  matcher: ["/issues/new", "/issues/edit/:id+"],
+  matcher: ["/issues/new"],
 };

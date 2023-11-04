@@ -10,17 +10,22 @@ const Navbar = () => {
   const issuesActive = pathname === "/issues";
   return (
     <Box className=" border-b">
-      <Box className="w-[min(100%,1280px)] space-x-5 flex p-5 items-center mx-auto ">
-        <AiFillBug className="text-3xl" />
-        <Link className={`nav-link ${dashboardActive && "active"}`} href={"/"}>
-          Dashboard
-        </Link>
-        <Link
-          className={`nav-link ${issuesActive && "active"}`}
-          href={"/issues"}
-        >
-          Issues
-        </Link>
+      <Box className="w-[min(100%,1280px)] flex justify-between p-5 items-center mx-auto ">
+        <Box className="flex items-center gap-5">
+          <AiFillBug className="text-3xl" />
+          <Link
+            className={`nav-link ${dashboardActive && "active"}`}
+            href={"/"}
+          >
+            Dashboard
+          </Link>
+          <Link
+            className={`nav-link ${issuesActive && "active"}`}
+            href={"/issues"}
+          >
+            Issues
+          </Link>
+        </Box>
         <User />
       </Box>
     </Box>
