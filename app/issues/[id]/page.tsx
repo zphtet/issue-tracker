@@ -15,24 +15,23 @@ const DetailPage = async ({ params }: DetailProps) => {
   const data = await prisma.issue.findUnique({
     where: { id: params.id },
   });
-  console.log(data);
   if (!data) notFound();
-  const { title, status, createdAt, description } = data;
+  const { title, status, createdAt, description, id } = data;
   return (
-    <div className="flex gap-10 ">
-      <div className="flex-1 space-y-5">
+    <div className="flex flex-col md:flex-row gap-10 ">
+      <div className="flex-1 space-y-5 ">
         <Heading>{title}</Heading>
         <div className="flex gap-10 ">
           <StatusComponent status={status} />
           <p>{createdAt.toDateString()}</p>
         </div>
-        <div className="border p-5 rounded-md prose">
+        <div className="border p-5 rounded-md prose w-[100%]">
           <Markdown>{description}</Markdown>
         </div>
       </div>
       <div className="basis-[200px]  flex flex-col gap-1">
         <SelectComponent />
-        <EditButton />
+        <EditButton id={id} />
         <DeleteButton />
       </div>
     </div>

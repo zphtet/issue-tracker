@@ -1,9 +1,11 @@
 "use client";
 import { Button } from "@radix-ui/themes";
 import { FiEdit } from "react-icons/fi";
-const EditButton = () => {
+import { useRouter } from "next/navigation";
+const EditButton = ({ id }: { id: string }) => {
+  const router = useRouter();
   return (
-    <Button>
+    <Button onClick={() => router.push(`/issues/edit/${id}`)}>
       <FiEdit />
       Edit Issue
     </Button>

@@ -5,18 +5,24 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import SimpleMDE from "react-simplemde-editor";
+import { Issue } from "@prisma/client";
 
 type IssueForm = {
   title: string;
   description: string;
 };
 
-export default function CreateIssue() {
+export default function CreateIssue({ data }: { data?: Issue }) {
+  const editData = data;
   const [isLoading, setLoading] = useState(false);
-  const { handleSubmit, register, control } = useForm<IssueForm>();
+  const { handleSubmit, register, control } = useForm<IssueForm>({
+    defaultValues: {
+      title: data?.title,
+      description: data?.description,
+    },
+  });
   const router = useRouter();
-  const submitHandler: SubmitHandler<IssueForm> = async (data) => {
-    setLoading(true);
+  const createIssue = async (data: IssueForm) => {
     const res = await fetch("/api/issues/", {
       method: "POST",
       headers: {
@@ -25,8 +31,32 @@ export default function CreateIssue() {
       body: JSON.stringify(data),
     });
     const createdData = await res.json();
+    return createdData;
+  };
+
+  const updateIssue = async (data: IssueForm, id: string) => {
+    const res = await fetch(`/api/issues/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const updatedData = await res.json();
+    return updatedData;
+  };
+
+  const submitHandler: SubmitHandler<IssueForm> = async (data) => {
+    setLoading(true);
+    let returnedData;
+    if (!editData) {
+      returnedData = await createIssue(data);
+    }
+    if (editData) {
+      returnedData = await updateIssue(data, editData.id);
+    }
     setLoading(false);
-    if (createdData.status === "success") {
+    if (returnedData.status === "success") {
       router.push("/issues");
       router.refresh();
     }
@@ -51,10 +81,16 @@ export default function CreateIssue() {
         <button
           disabled={isLoading}
           type="submit"
-          className="px-4 py-2 text-white bg-violet-600"
+          className={`px-4 py-2 text-white bg-violet-600 ${
+            isLoading && "opacity-50"
+          }`}
         >
           {" "}
-          {isLoading ? "Loading..." : "Submit Issues"}
+          {isLoading
+            ? "Loading..."
+            : editData
+            ? "Update Issues"
+            : "Submit Issues"}
         </button>
       </form>
     </Container>
