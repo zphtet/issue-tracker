@@ -3,6 +3,7 @@ import { Box } from "@radix-ui/themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AiFillBug } from "react-icons/ai";
+import User from "./User";
 const Navbar = () => {
   const pathname = usePathname();
   const dashboardActive = pathname === "/";
@@ -20,6 +21,7 @@ const Navbar = () => {
         >
           Issues
         </Link>
+        <User />
       </Box>
     </Box>
   );
