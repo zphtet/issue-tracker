@@ -32,7 +32,7 @@ const DetailPage = async ({ params }: DetailProps) => {
       <div className="basis-[200px]  flex flex-col gap-1">
         <SelectComponent />
         <EditButton id={id} />
-        <DeleteButton />
+        <DeleteButton id={id} />
       </div>
     </div>
   );
