@@ -28,7 +28,7 @@ export default async function IssuePage({
   return (
     <div>
       <p>Issue Page</p>
-      <div className="border flex items-center justify-between my-5">
+      <div className=" flex items-center justify-between my-5">
         <Filter />
         <CreateButton />
       </div>

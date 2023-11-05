@@ -1,9 +1,14 @@
 import prisma from "@/prisma";
+import authOption from "@/utils/authOptions";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
+  const session = await getServerSession(authOption);
+  if (!session) {
+    return NextResponse.json("Unauthorized", { status: 401 });
+  }
   const reqData = await req.json();
-  console.log(reqData);
   const res = await prisma.issue.create({
     data: {
       title: reqData.title,

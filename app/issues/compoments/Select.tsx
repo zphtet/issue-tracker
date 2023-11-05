@@ -1,7 +1,7 @@
 "use client";
 import { User } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
-
+import { useRouter } from "next/navigation";
 const SelectComponent = ({
   users,
   issueId,
@@ -12,17 +12,22 @@ const SelectComponent = ({
   defaultUserId: string | null;
 }) => {
   // console.log(users);
-
+  const router = useRouter();
   const updateFun = async (id: string | null) => {
-    await fetch(`/api/issues/${issueId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        assignId: id,
-      }),
-    });
+    try {
+      await fetch(`/api/issues/${issueId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          assignId: id,
+        }),
+      });
+      router.refresh();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const assignHandler = async (value: string) => {

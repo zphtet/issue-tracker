@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react";
 
 const CreateButton = () => {
   const router = useRouter();
-  const { data } = useSession();
   return (
     <Button
       onClick={() => {
