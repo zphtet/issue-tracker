@@ -2,10 +2,38 @@
 import { User } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 
-const SelectComponent = ({ users }: { users: User[] }) => {
+const SelectComponent = ({
+  users,
+  issueId,
+  defaultUserId,
+}: {
+  users: User[];
+  issueId: string;
+  defaultUserId: string | null;
+}) => {
   // console.log(users);
+
+  const updateFun = async (id: string | null) => {
+    await fetch(`/api/issues/${issueId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        assignId: id,
+      }),
+    });
+  };
+
+  const assignHandler = async (value: string) => {
+    updateFun(value === "unassigned" ? null : value);
+  };
+
   return (
-    <Select.Root defaultValue="unassigned">
+    <Select.Root
+      defaultValue={defaultUserId || "unassigned"}
+      onValueChange={assignHandler}
+    >
       <Select.Trigger />
       <Select.Content position="popper">
         <Select.Item value="unassigned">Unassigned</Select.Item>

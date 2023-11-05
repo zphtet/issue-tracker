@@ -37,7 +37,11 @@ const DetailPage = async ({ params }: DetailProps) => {
       </div>
       {session?.user && (
         <div className="basis-[200px]  flex flex-col gap-1">
-          <SelectComponent users={users} />
+          <SelectComponent
+            users={users}
+            issueId={params.id}
+            defaultUserId={data.assignId}
+          />
           <EditButton id={id} />
           <DeleteButton id={id} />
         </div>

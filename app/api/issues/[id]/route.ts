@@ -5,7 +5,11 @@ export async function PATCH(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  const body = (await request.json()) as { title: string; description: string };
+  const body = (await request.json()) as {
+    title: string;
+    description: string;
+    assignId: string;
+  };
   const findOne = await prisma.issue.findUnique({
     where: {
       id: params.id,
@@ -17,13 +21,22 @@ export async function PATCH(
       statusCode: 404,
     });
   }
+  if (body.assignId) {
+    const data = await prisma.user.findUnique({
+      where: {
+        id: body.assignId,
+      },
+    });
+    if (!data) return NextResponse.json("Not Found User", { status: 404 });
+  }
   const updatedIssue = await prisma.issue.update({
     where: {
       id: params.id,
     },
     data: {
-      title: body.description,
+      title: body.title,
       description: body.description,
+      assignId: body.assignId,
     },
   });
 
