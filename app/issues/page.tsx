@@ -4,13 +4,32 @@ import TableCell from "./compoments/TableCell";
 import StatusCompoment from "./compoments/Status";
 import prisma from "@/prisma";
 import { Issue } from "@prisma/client";
-export default async function IssuePage() {
-  const data = (await prisma.issue.findMany({})) as Issue[];
+import Filter from "./compoments/Filter";
+export default async function IssuePage({
+  searchParams,
+}: {
+  searchParams?: { filter?: string | undefined };
+}) {
+  const { filter } = searchParams!;
+  const byStatus =
+    filter === "open"
+      ? "OPEN"
+      : filter === "inprogress"
+      ? "IN_PROGRESS"
+      : filter === "closed"
+      ? "CLOSED"
+      : undefined;
+  const data = (await prisma.issue.findMany({
+    where: {
+      status: byStatus,
+    },
+  })) as Issue[];
 
   return (
     <div>
       <p>Issue Page</p>
-      <div>
+      <div className="border flex items-center justify-between my-5">
+        <Filter />
         <CreateButton />
       </div>
       <div>
