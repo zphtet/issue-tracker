@@ -8,16 +8,21 @@ import SelectComponent from "../compoments/Select";
 import Markdown from "react-markdown";
 import authOption from "@/utils/authOptions";
 import { getServerSession } from "next-auth";
+import { cache } from "react";
 type DetailProps = {
   params: { id: string };
 };
 
+const fetchIssue = cache((id: string) => {
+  return prisma.issue.findUnique({
+    where: { id: id },
+  });
+});
+
 const DetailPage = async ({ params }: DetailProps) => {
   const session = await getServerSession(authOption);
 
-  const data = await prisma.issue.findUnique({
-    where: { id: params.id },
-  });
+  const data = await fetchIssue(params.id);
 
   const users = await prisma.user.findMany({});
 
@@ -51,3 +56,12 @@ const DetailPage = async ({ params }: DetailProps) => {
 };
 
 export default DetailPage;
+
+export const generateMetadata = async ({ params }: DetailProps) => {
+  const data = await fetchIssue(params.id);
+
+  return {
+    title: data?.title,
+    description: data?.description,
+  };
+};

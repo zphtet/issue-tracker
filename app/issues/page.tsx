@@ -7,6 +7,7 @@ import { Issue } from "@prisma/client";
 import Filter from "./compoments/Filter";
 import Pagination from "./compoments/Pagination";
 import { NUM_OF_ISSUES_PER_PAGE } from "@/utils/constants";
+import { Metadata } from "next";
 export default async function IssuePage({
   searchParams,
 }: {
@@ -73,3 +74,8 @@ export default async function IssuePage({
 }
 
 export const revalidate = 0;
+
+export const metadata: Metadata = {
+  title: "All Issues",
+  description: " You can view all issues",
+};

@@ -8,7 +8,7 @@ import { ThemePanel } from "@radix-ui/themes";
 const inter = Inter({ subsets: ["latin"] });
 import NextAuthProvider from "./components/NextAuthProvider";
 export const metadata: Metadata = {
-  title: "Issue Tracker App",
+  title: "Issue Tracker - Dashboard",
   description: "create issues and assign",
 };
 
