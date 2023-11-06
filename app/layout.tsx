@@ -23,7 +23,7 @@ export default function RootLayout({
         <NextAuthProvider>
           <Theme appearance="light" accentColor="purple" radius="small">
             <Navbar />
-            <Container className="w-[min(100%,1280px)] mx-auto p-5">
+            <Container className="w-[min(100%,1180px)] mx-auto p-5">
               {children}
             </Container>
           </Theme>

@@ -10,9 +10,9 @@ const Navbar = () => {
   const issuesActive = pathname === "/issues";
   return (
     <Box className=" border-b">
-      <Box className="w-[min(100%,1280px)] flex justify-between p-5 items-center mx-auto ">
+      <Box className="w-[min(100%,1180px)] flex justify-between sm:p-5 items-center mx-auto py-3 px-5">
         <Box className="flex items-center gap-5">
-          <AiFillBug className="text-3xl" />
+          <AiFillBug className="sm:text-3xl text-2xl" />
           <Link
             className={`nav-link ${dashboardActive && "active"}`}
             href={"/"}

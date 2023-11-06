@@ -15,7 +15,10 @@ const UserProfile = ({
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
         <Avatar
-          size="3"
+          size={{
+            initial: "2",
+            sm: "3",
+          }}
           src={image}
           radius="full"
           fallback="T"

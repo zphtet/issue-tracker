@@ -10,7 +10,7 @@
 
 @layer components {
   .nav-link {
-    @apply text-xl  text-black;
+    @apply sm:text-xl text-base  text-black;
   }
   .active {
     @apply text-gray-600 opacity-80;

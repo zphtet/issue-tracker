@@ -26,7 +26,7 @@ const Pagination = ({ total }: { total: number }) => {
   };
 
   return (
-    <div className="flex items-center gap-5 my-5">
+    <div className="flex items-center gap-5 mt-5">
       <p>
         Showing page {currentPage} of {totalPage}
       </p>

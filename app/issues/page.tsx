@@ -36,8 +36,8 @@ export default async function IssuePage({
   });
 
   return (
-    <div>
-      <div className=" flex items-center justify-between my-5">
+    <div className=" w-full">
+      <div className=" flex items-center justify-between mb-5">
         <Filter />
         <CreateButton />
       </div>
