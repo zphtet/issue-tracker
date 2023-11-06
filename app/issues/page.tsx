@@ -25,6 +25,9 @@ export default async function IssuePage({
   const data = (await prisma.issue.findMany({
     skip: (pageValue - 1) * NUM_OF_ISSUES_PER_PAGE,
     take: NUM_OF_ISSUES_PER_PAGE,
+    orderBy: {
+      createdAt: "desc",
+    },
     where: {
       status: byStatus,
     },
