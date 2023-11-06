@@ -7,6 +7,7 @@ const Filter = () => {
   const router = useRouter();
   const params = new URLSearchParams();
   const searchParams = useSearchParams();
+
   const filterHandler = (value: string) => {
     params.append("filter", value);
     const query = params.size && "?" + params.toString();

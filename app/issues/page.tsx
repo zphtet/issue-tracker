@@ -5,12 +5,15 @@ import StatusCompoment from "./compoments/Status";
 import prisma from "@/prisma";
 import { Issue } from "@prisma/client";
 import Filter from "./compoments/Filter";
+import Pagination from "./compoments/Pagination";
+import { NUM_OF_ISSUES_PER_PAGE } from "@/utils/constants";
 export default async function IssuePage({
   searchParams,
 }: {
-  searchParams?: { filter?: string | undefined };
+  searchParams?: { filter?: string | undefined; page?: string | undefined };
 }) {
-  const { filter } = searchParams!;
+  const { filter, page } = searchParams!;
+  const pageValue = Number(page) || 1;
   const byStatus =
     filter === "open"
       ? "OPEN"
@@ -20,14 +23,20 @@ export default async function IssuePage({
       ? "CLOSED"
       : undefined;
   const data = (await prisma.issue.findMany({
+    skip: (pageValue - 1) * NUM_OF_ISSUES_PER_PAGE,
+    take: NUM_OF_ISSUES_PER_PAGE,
     where: {
       status: byStatus,
     },
   })) as Issue[];
+  const totalCount = await prisma.issue.count({
+    where: {
+      status: byStatus,
+    },
+  });
 
   return (
     <div>
-      <p>Issue Page</p>
       <div className=" flex items-center justify-between my-5">
         <Filter />
         <CreateButton />
@@ -55,6 +64,7 @@ export default async function IssuePage({
           </Table.Body>
         </Table.Root>
       </div>
+      <Pagination total={totalCount} />
     </div>
   );
 }
