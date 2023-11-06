@@ -16,7 +16,12 @@ const ModalBox = ({ handler }: { handler: () => void }) => {
           </Button>
         </Dialog.Close>
         <Dialog.Close>
-          <Button onClick={handler}>Delete</Button>
+          <button
+            className=" rounded px-2 bg-[var(--accent-9)] text-[var(--accent-9-contrast)]"
+            onClick={handler}
+          >
+            Delete
+          </button>
         </Dialog.Close>
       </Flex>
     </Dialog.Content>

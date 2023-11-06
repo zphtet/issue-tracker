@@ -26,7 +26,7 @@ const LatestIssues = async () => {
       <Box className=" my-5 [&>*:not(:last-child)]:border-b">
         {LatestData.map((issue) => {
           return (
-            <Flex justify={"between"} py={"2"}>
+            <Flex justify={"between"} py={"2"} key={issue.id}>
               <Box>
                 <Link href={`/issues/${issue.id}`} className="hover:underline">
                   {issue.title}

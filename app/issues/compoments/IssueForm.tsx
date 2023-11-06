@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import SimpleMDE from "react-simplemde-editor";
 import { Issue } from "@prisma/client";
+import Spinner from "./Spinner";
 
 type IssueForm = {
   title: string;
@@ -47,6 +48,7 @@ export default function CreateIssue({ data }: { data?: Issue }) {
   };
 
   const submitHandler: SubmitHandler<IssueForm> = async (data) => {
+    if (!data.description?.trim()) return;
     setLoading(true);
     let returnedData;
     if (!editData) {
@@ -68,7 +70,10 @@ export default function CreateIssue({ data }: { data?: Issue }) {
         <TextField.Root>
           <TextField.Input
             placeholder="Issue title ... "
-            {...register("title")}
+            {...register("title", {
+              required: "title is required",
+              minLength: 5,
+            })}
           />
         </TextField.Root>
         <Controller
@@ -81,13 +86,13 @@ export default function CreateIssue({ data }: { data?: Issue }) {
         <button
           disabled={isLoading}
           type="submit"
-          className={`px-4 py-2 text-white bg-violet-600 ${
+          className={`rounded px-4 py-2 bg-[var(--accent-9)] text-[var(--accent-9-contrast)] ${
             isLoading && "opacity-50"
           }`}
         >
           {" "}
           {isLoading
-            ? "Loading..."
+            ? `Loading ... `
             : editData
             ? "Update Issues"
             : "Submit Issues"}

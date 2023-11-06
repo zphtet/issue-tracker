@@ -22,14 +22,14 @@ const DeleteButton = ({ id }: { id: string }) => {
     <>
       <Dialog.Root>
         <Dialog.Trigger>
-          <Button
-            color="red"
+          <button
             disabled={isDeleting}
+            className="bg-red-600 text-white flex items-center gap-2 justify-center rounded py-1"
             // onClick={() => setModalOpen(true)}
           >
             <AiFillDelete />
             {isDeleting ? <Spinner /> : "Delete"}
-          </Button>
+          </button>
         </Dialog.Trigger>
         <ModalBox handler={deleteHandler} />
       </Dialog.Root>
