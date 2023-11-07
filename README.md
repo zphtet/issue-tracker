@@ -1,34 +1,81 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Issue Tracker
+### Full stack Nextjs |  prisma | mongodb
 
-First, run the development server:
+
+
+
+
+## Tech Stack
+
+Technologies used in the project:
+
+- [NextJS - 14](https://nextjs.org/)
+- [Typescript](https://www.typescriptlang.org/) 
+- [prisma](https://www.prisma.io/)
+- [MongoDB](https://www.mongodb.com/)
+- [NextAuth](https://next-auth.js.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [React hook form   ](https://react-hook-form.com/)
+- [Recharts](https://recharts.org/)
+
+
+## Features
+
+- create | read |  delete | update  issues 
+- assign issues to users
+- pagination | filtering
+- authentication
+- overview dashboard
+
+
+## Installation
+
+Install my-project with npm
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+  npm install my-project
+  cd my-project
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+ .env
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+DATABASE_URL=
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# google authentication
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+NEXTAUTH_SECRET=
 
-## Learn More
+``` 
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+  npm install
+``` 
+```bash
+  npm run dev
+``` 
+    
+## Screenshots
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Overview Dashboard
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![App Screenshot](https://gmcbpoevhicvdrpjtdpc.supabase.co/storage/v1/object/public/imgs/issue-tracker-dashboard.png)
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+All issues page
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![App Screenshot](https://gmcbpoevhicvdrpjtdpc.supabase.co/storage/v1/object/public/imgs/allissues.png)
+
+
+Create new issue - markdown editor
+
+![App Screenshot](https://gmcbpoevhicvdrpjtdpc.supabase.co/storage/v1/object/public/imgs/createnewissue.png)
+
+Issue detail and assign User
+
+![App Screenshot](https://gmcbpoevhicvdrpjtdpc.supabase.co/storage/v1/object/public/imgs/detailissue.png)
+## Demo
+
+[Live Demo](https://issue-tracker-rho-lemon.vercel.app/)
